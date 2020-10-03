@@ -7,7 +7,7 @@ import LocalesController from '../controllers/LocalesController';
 const localesRouter = Router();
 const localesController = new LocalesController();
 
-localesRouter.use(ensureAuthenticated);
+// localesRouter.use(ensureAuthenticated);
 
 localesRouter.post('/', localesController.create);
 // productsRouter.get("/", productsController.index);
