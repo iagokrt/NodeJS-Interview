@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateLocaleService from '@modules/locales/services/CreateLocaleService';
 import ListLocalesService from '@modules/locales/services/ListLocalesService';
 import DeleteLocaleService from '@modules/locales/services/DeleteLocaleService';
+import UpdateLocaleService from '@modules/locales/services/UpdateLocaleService';
 
 export default class LocalesController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -35,5 +36,20 @@ export default class LocalesController {
     await deleteLocale.execute({ id });
 
     return response.status(204).json();
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const { city, state } = request.body;
+
+    const updateLocale = container.resolve(UpdateLocaleService);
+
+    const updatedData = await updateLocale.execute({
+      id,
+      city,
+      state
+    });
+
+    return response.json(updatedData);
   }
 }

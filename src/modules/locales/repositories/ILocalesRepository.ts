@@ -1,6 +1,7 @@
 import Locale from '../infra/typeorm/entities/Locale';
 import ICreateLocaleDTO from '../dtos/ICreateLocaleDTO';
 import IDeleteLocaleDTO from '../dtos/IDeleteLocaleDTO';
+import IUpdateLocaleDTO from '../dtos/IUpdateLocaleDTO';
 
 export default interface ILocalesRepository {
   findById(id: string): Promise<Locale | undefined>;
@@ -10,6 +11,6 @@ export default interface ILocalesRepository {
   create(data: ICreateLocaleDTO): Promise<Locale>;
   save(locale: Locale): Promise<Locale>;
   delete({ id }: IDeleteLocaleDTO): Promise<void>;
-
+  update(data: IUpdateLocaleDTO): Promise<Locale>;
   // sign all methods here
 }

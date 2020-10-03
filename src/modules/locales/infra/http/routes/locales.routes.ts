@@ -11,6 +11,7 @@ const localesController = new LocalesController();
 
 localesRouter.post('/', localesController.create);
 localesRouter.get('/', localesController.index);
+localesRouter.put('/:id', localesController.update);
 localesRouter.delete('/', localesController.delete);
 
 export default localesRouter;
