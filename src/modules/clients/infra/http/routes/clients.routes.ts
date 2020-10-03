@@ -8,5 +8,7 @@ const clientsRouter = Router();
 const clientsController = new ClientsController();
 
 clientsRouter.post('/', clientsController.create);
+clientsRouter.get('/', clientsController.index);
+clientsRouter.delete('/', clientsController.delete);
 
 export default clientsRouter;

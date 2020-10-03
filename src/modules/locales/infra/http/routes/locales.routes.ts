@@ -10,7 +10,7 @@ const localesController = new LocalesController();
 // localesRouter.use(ensureAuthenticated);
 
 localesRouter.post('/', localesController.create);
-// productsRouter.get("/", productsController.index);
-// productsRouter.delete("/", productsController.delete);
+localesRouter.get('/', localesController.index);
+localesRouter.delete('/', localesController.delete);
 
 export default localesRouter;

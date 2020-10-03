@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
+import ILocalesRepository from '@modules/locales/repositories/ILocalesRepository';
 import Client from '../infra/typeorm/entities/Client';
 import IClientsRepository from '../repositories/IClientsRepository';
 
@@ -21,6 +22,9 @@ class CreateClientService {
     @inject('ClientsRepository')
     private clientsRepository: IClientsRepository,
 
+    @inject('LocalesRepository')
+    private localesRepository: ILocalesRepository,
+
     @inject('HashProvider')
     private hashProvider: IHashProvider
   ) {}
@@ -36,6 +40,12 @@ class CreateClientService {
 
     if (checkDuplicateEmail) {
       throw new AppError('cannot register this email');
+    }
+
+    const checkLocaleExists = await this.localesRepository.findById(locale_id);
+
+    if (!checkLocaleExists) {
+      throw new AppError('locale does not exists in our database');
     }
 
     const encryptedPassword = await this.hashProvider.generateHash(password);

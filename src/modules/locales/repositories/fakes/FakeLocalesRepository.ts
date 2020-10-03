@@ -25,6 +25,12 @@ class FakeLocalesRepository implements ILocalesRepository {
     return foundByState;
   }
 
+  public async findAll(): Promise<Locale[]> {
+    const { locales } = this;
+
+    return locales;
+  }
+
   public async create(requestData: ICreateLocaleDTO): Promise<Locale> {
     const locale = new Locale();
 
@@ -42,6 +48,8 @@ class FakeLocalesRepository implements ILocalesRepository {
 
     return locale;
   }
+
+  // delete method
 
   // Add custom methods if needed
 }

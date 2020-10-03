@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 
 import IClientsRepository from '@modules/clients/repositories/IClientsRepository';
 import ICreateClientDTO from '@modules/clients/dtos/ICreateClientDTO';
+import IDeleteClientDTO from '@modules/clients/dtos/IDeleteClientDTO';
 
 import Client from '../entities/Client';
 
@@ -24,6 +25,12 @@ class ClientsRepository implements IClientsRepository {
     });
 
     return client;
+  }
+
+  public async findAll(): Promise<Client[]> {
+    // let products: Product[]
+    const clients = await this.ormRepository.find();
+    return clients;
   }
 
   public async save(client: Client): Promise<Client> {
@@ -50,6 +57,14 @@ class ClientsRepository implements IClientsRepository {
     return client;
   }
 
+  public async delete({ id }: IDeleteClientDTO): Promise<void> {
+    // findByIds is directly from typeorm
+    const clientId = this.ormRepository.findByIds([id]);
+    if (!clientId) {
+      throw new AppError('cannot delete. id not found');
+    }
+    await this.ormRepository.delete(id);
+  }
   // Add custom methods if need
 }
 
