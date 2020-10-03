@@ -1,1 +1,6 @@
 node_modules
+ormconfig.json
+config/auth.ts
+.vscode/
+tmp/*
+!tmp/.gitkeep
